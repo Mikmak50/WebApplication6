@@ -1,0 +1,100 @@
+﻿@model WebApplication6.Models.Ride
+
+
+
+<form method="post">
+    @if (Model.Id != Guid.Empty)
+    {
+        <input asp-for="Id" hidden />
+    }
+
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Delete Ride</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Description"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Description" disabled class="form-control" />
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CarId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Car.Name" disabled class="form-control">
+                            <option disabled selected>--Select car--</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="DateStart" class="control-label"></label>
+                    </div>
+                    <div class="col-8">
+
+
+                        <div class="input-group date" data-provide="datepicker">
+                            <input asp-for="DateStart" disabled type="text" class="form-control">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PlaceStartId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="PlaceStart.Name" disabled class="form-control">
+                            <option disabled selected>--Select start place--</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="PlaceEndId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="PlaceEnd.Name" disabled class="form-control">
+                            <option disabled selected>--Select end place--</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            <button type="submit" class="btn btn-danger w-100" >Delete</button>
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100">
+                                Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+        <script>
+            $('.datepicker').datepicker();
+        </script>
+
+
+    }
+}

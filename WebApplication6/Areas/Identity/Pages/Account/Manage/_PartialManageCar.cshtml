@@ -1,0 +1,15 @@
+﻿@model List<Car>
+
+<table class="table">
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                
+                <td>
+                        <label asp-for="@car.Name"></label>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

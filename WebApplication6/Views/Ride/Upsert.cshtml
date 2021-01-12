@@ -1,0 +1,131 @@
+﻿@model WebApplication6.Models.ViewModels.RideVM
+
+@{
+    var title = "Create Ride";
+}
+
+<form method="post">
+    @if (Model.Ride.Id != Guid.Empty)
+    {
+        <input asp-for="Ride.Id" hidden />
+        title = "Update Ride";
+    }
+
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-info pl-3">@title</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Ride.Description"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Ride.Description" class="form-control" />
+                        <span asp-validation-for="Ride.Description" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Ride.CarId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Ride.CarId" asp-items="@Model.CarSelectList" class="form-control">
+                            <option disabled selected>--Select car--</option>
+                        </select>
+                        <span asp-validation-for="Ride.CarId" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Ride.DateStart" class="control-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <div class="md-form md-outline input-with-post-icon datepicker" id="customDays">
+
+                            <input asp-for="Ride.DateStart" id="Customization" type="text" class="form-control">
+                            <label for="Customization">Start date...</label>
+                            <i class="fas fa-calendar input-prefix" tabindex=0></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Ride.TimeStart" class="control-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <div class="md-form md-outline input-with-post-icon timepicker" darktheme="true">
+                            <input asp-for="Ride.TimeStart" id="dark-version-example" type="text" class="form-control" placeholder="Select time">
+                            <label for="dark-version-example">Start Time</label>
+                            <i class="fas fa-envelope  input-prefix"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Ride.PlaceStartId"></label>
+                        </div>
+                        <div class="col-8">
+                            <select asp-for="Ride.PlaceStartId" asp-items="@Model.PlaceStartSelectList" class="form-control">
+                                <option disabled selected>--Select start place--</option>
+                            </select>
+                            <span asp-validation-for="Ride.PlaceStartId" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Ride.PlaceEndId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Ride.PlaceEndId" asp-items="@Model.PlaceEndSelectList" class="form-control">
+                            <option disabled selected>--Select end place--</option>
+                        </select>
+                        <span asp-validation-for="Ride.PlaceEndId" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            @if (Model.Ride.Id != Guid.Empty)
+                            {
+                                <input type="submit" class="btn btn-info w-100" value="Update" />
+                            }
+                            else
+                            {
+                                <input type="submit" onclick="validateInput()" class="btn btn-info w-100" value="Create" />
+                            }
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100">
+                                Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+        <script type="text/javascript">
+            $('.datepicker').datepicker({
+                weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                showMonthsShort: true
+            });
+        </script>
+
+
+    }
+}
